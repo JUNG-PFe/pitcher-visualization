@@ -11,7 +11,7 @@ import io
 
 # 폰트 설정
 font_path =  "fonts/현대하모니 L.TTF"
-font_prop = fm.FontProperties(fname=font_path)
+font_prop = fm.FontProperties(fname="fonts/현대하모니 L.ttf")
 
 # 데이터 컬러 설정
 cols = {
