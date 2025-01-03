@@ -2,5 +2,6 @@ streamlit
 pandas
 matplotlib
 plotnine
+requests
 openpyxl
 xlsxwriter
