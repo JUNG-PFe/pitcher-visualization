@@ -7,10 +7,21 @@ from plotnine import (
 )
 import matplotlib.font_manager as fm
 import io  
+import os
+import requests
 
+font_url = "https://raw.githubusercontent.com/JUNG-PFe/pitcher-visualization/main/fonts/%ED%98%84%EB%8C%80%ED%95%98%EB%AA%A8%EB%8B%88%20L.TTF"
+font_path = "./fonts/현대하모니 L.TTF"
 
-# 폰트 설정
-font_path =  "fonts/현대하모니 L.TTF"
+# 폰트 디렉토리 생성 및 다운로드
+if not os.path.exists("./fonts"):
+    os.makedirs("./fonts")
+if not os.path.exists(font_path):
+    response = requests.get(font_url)
+    with open(font_path, "wb") as f:
+        f.write(response.content)
+
+# FontProperties 설정
 font_prop = fm.FontProperties(fname=font_path)
 
 # 데이터 컬러 설정
