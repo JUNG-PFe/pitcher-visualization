@@ -106,10 +106,10 @@ if st.session_state.filter_applied:
         st.subheader("기본 분석 값")
         analysis = filtered_df.groupby('구종').agg(
             투구수=('구종', 'count'),
-            투구_비율=('구종', lambda x: (x.count() / len(filtered_df)) * 100),
-            스트라이크_비율=('심판콜', lambda x: (x[x != 'B'].count() / x.count()) * 100 if x.count() > 0 else 0),
-            구속_평균=('RelSpeed', lambda x: round(x.mean(), 1)),
-            구속_최고=('RelSpeed', lambda x: round(x.max(), 1)),
+            투구_비율=('구종',  lambda x: round((x.count() / len(filtered_df)) * 100, 1)),
+            스트라이크_비율=('심판콜', lambda x: round((x[x != 'B'].count() / x.count()) * 100, 1) if x.count() > 0 else 0),
+            구속_평균=('RelSpeed', lambda x: round(x.mean(), 0)),
+            구속_최고=('RelSpeed', lambda x: round(x.max(), 0)),
             회전수=('SpinRate', lambda x: round(x.mean(), 0)),
             회전효율=('회전효율', lambda x: round(x.mean(), 0)),
             Tilt=('Tilt', lambda x: x.mode().iloc[0] if not x.mode().empty else None),
@@ -121,7 +121,37 @@ if st.session_state.filter_applied:
         ).reset_index()
         st.dataframe(analysis)
 
+    # 구종별 플레이트 위치 시각화
+    st.subheader("구종별 플레이트 위치")
+    if not filtered_df.empty:
+        ggpoint = (
+            ggplot(filtered_df, aes(x='PlateLocSide*100', y='PlateLocHeight*100'))
+            + geom_point(aes(fill='구종'), shape='o', size=5)
+            + scale_fill_manual(values=cols, breaks=filtered_df['구종'].unique())
+            + annotate("rect", xmin=-23, xmax=23, ymin=46, ymax=105, alpha=0.2)
+            + annotate("segment", x=-23, xend=23, y=85, yend=85, linetype='dashed')
+            + annotate("segment", x=-23, xend=23, y=65, yend=65, linetype='dashed')
+            + annotate("segment", x=-7.666, xend=-7.666, y=46, yend=105, linetype='dashed')
+            + annotate("segment", x=7.666, xend=7.666, y=46, yend=105, linetype='dashed')
+            + lims(x=(-70, 70), y=(-10, 150))
+            + theme_void()
+            + theme(
+                axis_title_x=element_blank(),
+                axis_text_x=element_blank(),
+                axis_ticks_x=element_blank(),
+                axis_title_y=element_blank(),
+                axis_text_y=element_blank(),
+                axis_ticks_y=element_blank(),
+                legend_title=element_blank(),
+                legend_position='none',
+                figure_size=(4, 5)
+            )
+        )
+        fig = ggpoint.draw()
+        st.pyplot(fig)
+
     # 시각화
+
     st.subheader("구종별 수평/수직 무브먼트")
     fig = px.scatter(
         filtered_df,
