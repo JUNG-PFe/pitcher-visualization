@@ -174,15 +174,15 @@ if st.session_state.filter_applied:
             + coord_cartesian(xlim=(-70, 70), ylim=(-10, 150))
             + theme_void()
             + theme(
-                text=element_text(family=font_prop.get_name(), size=10),
+                text=element_text(family='HDharmony', size=10),
                 axis_title_x=element_blank(),
                 axis_text_x=element_blank(),
                 axis_ticks_x=element_blank(),
                 axis_title_y=element_blank(),
                 axis_text_y=element_blank(),
                 axis_ticks_y=element_blank(),
-                legend_title=element_text(family=font_prop.get_name(), size=10),  # 범례 제목에 폰트 적용
-                legend_text=element_text(family=font_prop.get_name(), size=8),    # 범례 텍스트에 폰트 적용
+                legend_title=element_text(family='HDharmony', size=10),  # 범례 제목에 폰트 적용
+                legend_text=element_text(family='HDharmony', size=8),    # 범례 텍스트에 폰트 적용
                 legend_position="right",  # 범례를 오른쪽에 배치,
                 figure_size=(6, 7)
                 )
@@ -205,11 +205,11 @@ if st.session_state.filter_applied:
             + geom_vline(xintercept=0, linetype='dashed', size=1, color='darkgrey')
             + geom_hline(yintercept=0, linetype='dashed', size=1, color='darkgrey')
             + theme(
-                text=element_text(family=font_prop.get_name(), size=10),
-                axis_title=element_text(family=font_prop.get_name(), size=12),
-                axis_text=element_text(family=font_prop.get_name(), size=10),
-                legend_title=element_text(family=font_prop.get_name(), size=10),
-                legend_text=element_text(family=font_prop.get_name(), size=8),
+                text=element_text(family='HDharmony', size=10),
+                axis_title=element_text(family='HDharmony', size=12),
+                axis_text=element_text(family='HDharmony', size=10),
+                legend_title=element_text(family='HDharmony', size=10),
+                legend_text=element_text(family='HDharmony', size=8),
                 panel_grid_minor=element_blank(),
                 figure_size=(8, 7.5)
             )
