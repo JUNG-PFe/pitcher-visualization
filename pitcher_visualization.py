@@ -8,32 +8,9 @@ from plotnine import (
 import matplotlib.font_manager as fm
 import io  
 
-PASSWORD = st.secrets["PASSWORD"]
-
-# 비밀번호 입력
-def login():
-    st.title("로그인")
-    password = st.text_input("비밀번호를 입력하세요", type="password")
-    if password == PASSWORD:
-        st.session_state["authenticated"] = True
-        # 비밀번호 인증 후 새로고침 대신 상태를 갱신합니다.
-        st.write("로그인 성공!")
-    else:
-        st.error("비밀번호가 올바르지 않습니다.")
-
-# 세션 상태 초기화
-if "authenticated" not in st.session_state:
-    st.session_state["authenticated"] = False
-
-# 인증 여부에 따라 화면 변경
-if not st.session_state["authenticated"]:
-    login()
-else:
-    st.title("23-24 호크아이 투수 데이터 필터링 및 분석 앱")
-    st.write("환영합니다! 이제 앱을 사용할 수 있습니다.")
 
 # 폰트 설정
-font_path = 'C:\\Windows\\Fonts\\현대하모니 L.TTF'
+font_path = "fonts/현대하모니 L.TTF"
 font_prop = fm.FontProperties(fname=font_path)
 
 # 데이터 컬러 설정
@@ -70,8 +47,8 @@ def load_data():
 # 데이터 로드
 df = load_data()
 
-# Streamlit 앱 시작
-st.title("투수 데이터 필터링 및 분석 앱")
+# 앱 제목
+st.title("23-24 호크아이 투수 데이터 필터링 및 분석 앱")
 
 # 세션 상태 초기화
 if "filter_applied" not in st.session_state:
