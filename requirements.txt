@@ -1,9 +1,6 @@
-matplotlib
-pandas
 streamlit
+pandas
+matplotlib
 plotnine
-plotly
 openpyxl
-XlsxWriter
-matplotlib.font_manager
-io
+xlsxwriter
