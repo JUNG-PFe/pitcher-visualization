@@ -10,7 +10,7 @@ import io
 
 
 # 폰트 설정
-font_path = "fonts/현대하모니 L.TTF"
+font_path =  "fonts/현대하모니 L.TTF"
 font_prop = fm.FontProperties(fname=font_path)
 
 # 데이터 컬러 설정
